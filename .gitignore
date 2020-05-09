@@ -1,3 +1,10 @@
+# root files
+*.root
+*.pcm
+
+# python notebook checkpoints
+*.ipynb_checkpoints*
+
 # Prerequisites
 *.d
 
