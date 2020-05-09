@@ -303,6 +303,69 @@ void vbs_flat_ntupler(std::string sample) {
                    .Filter("vbf_j1 != -1", "has selected AK4 vbf 1")
                    .Filter("vbf_j2 != -1", "has selected AK4 vbf 2");
 
+    int metz_type = 0;
+    auto METzCalculator = [&metz_type](float l_pt, float l_eta, float l_phi, float l_m,
+                                       float met_pt, float met_phi)
+    {
+        auto isComplex_ = false;
+
+        auto met_y = met_pt * (TMath::Sin(met_phi));
+        auto met_x = met_pt * (TMath::Cos(met_phi));
+        auto lep_ = ROOT::Math::PtEtaPhiMVector(l_pt, l_eta, l_phi, l_m);
+        auto met_ = ROOT::Math::PxPyPzEVector(met_x, met_y, 0.0, met_pt);
+
+        double M_W = W_MASS;
+        double M_mu = l_m, emu = lep_.E(), pxmu = lep_.Px(), pymu = lep_.Py(), pzmu = lep_.Pz();
+        double pxnu = met_.Px(), pynu = met_.Py(), ptnu = met_.Pt(), pznu = 0.;
+        double otherSol_ = 0.;
+        double newPtneutrino1_ = -1, newPtneutrino2_ = -1;
+        double a = M_W*M_W/2 + pxnu*pxmu + pynu*pymu;
+        double A = pzmu*pzmu - emu*emu ;
+        double B = 2*pzmu*a;
+        double C = a*a - emu*emu*ptnu*ptnu;
+
+        double tmproot = B*B - 4.0*A*C;
+        if (tmproot<0) {
+            isComplex_= true;
+            pznu = - B/(2*A); // take real part of complex roots
+            otherSol_ = pznu;
+            // recalculate the neutrino pT
+            // solve quadratic eq. discriminator = 0 for pT of nu
+            double pnu = met_.E();
+            double Delta = (M_W*M_W - M_mu*M_mu);
+            double alpha = (pxmu*pxnu/pnu + pymu*pynu/pnu);
+            double ptnu = TMath::Sqrt( pxnu*pxnu + pynu*pynu); // old
+            double AA = 4.*pzmu*pzmu - 4*emu*emu + 4*alpha*alpha;
+            double BB = 4.*alpha*Delta;
+            double CC = Delta*Delta;
+            double tmpdisc = BB*BB - 4.0*AA*CC;
+            double tmpsolpt1 = (-BB + TMath::Sqrt(tmpdisc))/(2.0*AA);
+            double tmpsolpt2 = (-BB - TMath::Sqrt(tmpdisc))/(2.0*AA);
+            if (fabs(tmpsolpt1 - ptnu) < fabs(tmpsolpt2 - ptnu)) {
+                newPtneutrino1_ = tmpsolpt1; newPtneutrino2_ = tmpsolpt2;
+            } else {newPtneutrino1_ = tmpsolpt2; newPtneutrino2_ = tmpsolpt1;}
+        }
+        else {
+            isComplex_ = false;
+            double tmpsol1 = (-B + TMath::Sqrt(tmproot))/(2.0*A);
+            double tmpsol2 = (-B - TMath::Sqrt(tmproot))/(2.0*A);
+            //std::cout << " Neutrino Solutions: " << tmpsol1 << ", " << tmpsol2 << std::endl;
+            if (metz_type == 0 ) {
+              // two real roots, pick the one closest to pz of muon
+              if (TMath::Abs(tmpsol2-pzmu) < TMath::Abs(tmpsol1-pzmu)) {
+                  pznu = tmpsol2; otherSol_ = tmpsol1;
+              } else {pznu = tmpsol1; otherSol_ = tmpsol2;}
+              // if pznu is > 300 pick the most central root
+              if ( pznu > 300. ) {
+                if (TMath::Abs(tmpsol1)<TMath::Abs(tmpsol2)) {
+                    pznu = tmpsol1; otherSol_ = tmpsol2;
+                } else {pznu = tmpsol2; otherSol_ = tmpsol1;}
+              }
+            }
+        }
+        return pznu;
+    };
+
 
     TString select_lepton1 = "mu_idx[0] != -1? %s[mu_idx[0]]: ele_idx[0] != -1? %s[ele_idx[0]]: -999.f";
     TString select_lepton2 = "mu_idx[1] != -1? %s[mu_idx[1]]: ele_idx[1] != -1? %s[ele_idx[1]]: -999.f";
@@ -322,6 +385,9 @@ void vbs_flat_ntupler(std::string sample) {
                     .Define("lep2_q", Form(select_lepton2, "Muon_charge", "Electron_charge"))
                     .Define("lep2_iso", Form(select_lepton2, "Muon_pfRelIso04_all", "Electron_pfRelIso03_all"))
 
+                    .Define("neu_pz_type0", METzCalculator, {"lep1_pt", "lep1_eta", "lep1_phi", "lep1_m",
+                                                             "MET_pt", "MET_phi"})
+
                     .Define("bos_PuppiAK8_m_sd0_corr", "selectedFatJet_idx > -1? FatJet_msoftdrop[selectedFatJet_idx]: -999.f")
                     .Define("bos_PuppiAK8_pt", "selectedFatJet_idx > -1? FatJet_pt[selectedFatJet_idx]: -999.f");
 
@@ -329,7 +395,10 @@ void vbs_flat_ntupler(std::string sample) {
         "run", "evt",
         "lep1_pt", "lep1_eta", "lep1_phi", "lep1_m", "lep1_q", "lep1_iso",
         "lep2_pt", "lep2_eta", "lep2_phi", "lep2_m", "lep2_q", "lep2_iso",
+        "MET_pt", "MET_phi",
+        "neu_pz_type0",
         "bos_PuppiAK8_m_sd0_corr", "bos_PuppiAK8_pt",
+
         "nBtag_loose", "nBtag_medium", "nBtag_tight",
     };
 
