@@ -244,7 +244,7 @@ void vbs_flat_ntupler(std::string sample) {
                               RVec<float> jt_pt, RVec<float> jt_eta,
                               RVec<float> jt_phi, RVec<float> jt_m)
     {
-        auto idx = Combinations(jt_id, jt_id);
+        auto idx = Combinations(jt_id, 2);
         auto jt_pt_1 = Take(jt_pt, idx[0]);
         auto jt_eta_1 = Take(jt_eta, idx[0]);
         auto jt_phi_1 = Take(jt_phi, idx[0]);
