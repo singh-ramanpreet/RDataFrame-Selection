@@ -85,7 +85,16 @@ void vbs_flat_ntupler(std::string sample) {
 
     std::cout << ">>> Number of root files in sample " << sampleList.size() << std::endl;
 
+    ROOT::RDataFrame dfRuns("Runs", sampleList);
+    TH1F *totalEvents = new TH1F("TotalEvents", "TotalEvents", 2, -1, 1);
+    //genEventCount_ -> Number of Events,
+    //genEventSumw_ -> Sum of genWeight,
+    //genEventSumw2_ -> Sum of (genWeight *genWeight)
+    auto genEventCount_ = dfRuns.Sum("genEventCount_").GetValue();
+    totalEvents->SetBinContent(2, genEventCount_);
+
     ROOT::RDataFrame df("Events", sampleList);
+
     std::cout << ">>> Number of events: " << *df.Count() << std::endl;
 
     auto h_count = df.Histo1D({sample_basename.c_str(), sample_basename.c_str(), 1u, 0., 0.}, "event");
@@ -410,8 +419,15 @@ void vbs_flat_ntupler(std::string sample) {
 
     dfFinal.Snapshot("Events", outputFileName, finalVariables);
 
-    time.Stop();
     report->Print();
     //h_count->Print();
+
+    TFile *outFile = TFile::Open(outputFileName.c_str(), "update");
+    outFile->cd();
+    totalEvents->Write();
+    outFile->Close();
+
+    time.Stop();
     time.Print();
+
 }
