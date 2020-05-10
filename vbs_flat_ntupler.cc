@@ -100,7 +100,9 @@ void vbs_flat_ntupler(std::string sample) {
     auto h_count = df.Histo1D({sample_basename.c_str(), sample_basename.c_str(), 1u, 0., 0.}, "event");
     auto print_entries = [&poolSize](TH1D &h_)
     {
-        std::cout<< ">>> Entries processed: " << poolSize * h_.GetEntries() << std::endl;
+        int entries = h_.GetEntries();
+        entries = poolSize == 0? entries: poolSize * entries;
+        std::cout<< ">>> Entries processed: " << entries << std::endl;
     };
     h_count.OnPartialResult(50000, print_entries);
 
