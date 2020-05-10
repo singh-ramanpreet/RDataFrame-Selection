@@ -318,8 +318,8 @@ void vbs_flat_ntupler(std::string sample) {
     {
         auto isComplex_ = false;
 
-        auto met_y = met_pt * (TMath::Sin(met_phi));
         auto met_x = met_pt * (TMath::Cos(met_phi));
+        auto met_y = met_pt * (TMath::Sin(met_phi));
         auto lep_ = ROOT::Math::PtEtaPhiMVector(l_pt, l_eta, l_phi, l_m);
         auto met_ = ROOT::Math::PxPyPzEVector(met_x, met_y, 0.0, met_pt);
 
@@ -372,7 +372,24 @@ void vbs_flat_ntupler(std::string sample) {
               }
             }
         }
-        return pznu;
+        return float(pznu);
+    };
+
+    auto dilep_p4 = [](float l_pt1, float l_eta1, float l_phi1, float l_m1,
+                       float l_pt2, float l_eta2, float l_phi2, float l_m2,
+                       float met_x, float met_y, float met_z, float met_ett)
+    {
+        ROOT::Math::PtEtaPhiMVector vector1, vector2;
+        vector1.SetPt(l_pt1); vector1.SetEta(l_eta1); vector1.SetPhi(l_phi1); vector1.SetM(l_m1);
+        if (l_pt2 < 0) {
+            float met_e = TMath::Sqrt(met_x*met_x + met_y*met_y + met_z*met_z);
+            vector2.SetPxPyPzE(met_x, met_y, met_z, met_e);
+        } else {
+            vector2.SetPt(l_pt2); vector2.SetEta(l_eta2); vector2.SetPhi(l_phi2); vector2.SetM(l_m2);
+        }
+
+        auto dilep_ = vector1 + vector2;
+        return RVec<double>{dilep_.Pt(), dilep_.Eta(), dilep_.Phi(), dilep_.M()};
     };
 
 
@@ -394,8 +411,17 @@ void vbs_flat_ntupler(std::string sample) {
                     .Define("lep2_q", Form(select_lepton2, "Muon_charge", "Electron_charge"))
                     .Define("lep2_iso", Form(select_lepton2, "Muon_pfRelIso04_all", "Electron_pfRelIso03_all"))
 
+                    .Define("MET_px", "MET_pt * cos(MET_phi)")
+                    .Define("MET_py", "MET_pt * sin(MET_phi)")
                     .Define("neu_pz_type0", METzCalculator, {"lep1_pt", "lep1_eta", "lep1_phi", "lep1_m",
                                                              "MET_pt", "MET_phi"})
+                    .Define("dilep_p4", dilep_p4, {"lep1_pt", "lep1_eta", "lep1_phi", "lep1_m",
+                                                  "lep2_pt", "lep2_eta", "lep2_phi", "lep2_m",
+                                                  "MET_px", "MET_py", "neu_pz_type0", "MET_pt",})
+                    .Define("dilep_pt", "dilep_p4[0]")
+                    .Define("dilep_eta", "dilep_p4[1]")
+                    .Define("dilep_phi", "dilep_p4[2]")
+                    .Define("dilep_m", "dilep_p4[3]")
 
                     .Define("bos_PuppiAK8_m_sd0_corr", "selectedFatJet_idx > -1? FatJet_msoftdrop[selectedFatJet_idx]: -999.f")
                     .Define("bos_PuppiAK8_pt", "selectedFatJet_idx > -1? FatJet_pt[selectedFatJet_idx]: -999.f");
@@ -406,6 +432,7 @@ void vbs_flat_ntupler(std::string sample) {
         "lep2_pt", "lep2_eta", "lep2_phi", "lep2_m", "lep2_q", "lep2_iso",
         "MET_pt", "MET_phi",
         "neu_pz_type0",
+        "dilep_pt", "dilep_eta", "dilep_phi", "dilep_m",
         "bos_PuppiAK8_m_sd0_corr", "bos_PuppiAK8_pt",
 
         "nBtag_loose", "nBtag_medium", "nBtag_tight",
