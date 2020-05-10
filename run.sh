@@ -15,6 +15,6 @@ else
 fi
 
 sample_list_txt=${1}
-
-root -q -n -b vbs_flat_ntupler.cc+\(\"${sample_list_txt}\"\)
-
+isMC=${2}
+year=${3}
+root -q -n -b vbs_flat_ntupler.cc+\(\"${sample_list_txt}\",${isMC},${year}\)

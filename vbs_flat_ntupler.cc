@@ -49,7 +49,7 @@ const float AK8_LEP_DR_CUT = 1.0;
 const float AK4_AK8_DR_CUT = 0.8;
 const float AK4_DR_CUT = 0.3;
 
-void vbs_flat_ntupler(std::string sample) {
+void vbs_flat_ntupler(std::string sample, int isMC, int year) {
 
     gErrorIgnoreLevel = kError;
 
@@ -85,15 +85,28 @@ void vbs_flat_ntupler(std::string sample) {
 
     std::cout << ">>> Number of root files in sample " << sampleList.size() << std::endl;
 
-    ROOT::RDataFrame dfRuns("Runs", sampleList);
     TH1F *totalEvents = new TH1F("TotalEvents", "TotalEvents", 2, -1, 1);
-    //genEventCount_ -> Number of Events,
-    //genEventSumw_ -> Sum of genWeight,
-    //genEventSumw2_ -> Sum of (genWeight *genWeight)
-    auto genEventCount_ = dfRuns.Sum("genEventCount_").GetValue();
-    totalEvents->SetBinContent(2, genEventCount_);
+    if (isMC == 1) {
+        ROOT::RDataFrame dfRuns("Runs", sampleList);
+        //genEventCount_ -> Number of Events,
+        //genEventSumw_ -> Sum of genWeight,
+        //genEventSumw2_ -> Sum of (genWeight *genWeight)
+        auto genEventCount_ = dfRuns.Sum("genEventCount_").GetValue();
+        totalEvents->SetBinContent(2, genEventCount_);
+    }
 
     ROOT::RDataFrame df("Events", sampleList);
+
+    // make alias for scale variations branches for "Data" samples
+    if (isMC == 0) {
+        std::cout << ">>> This sample is Data, adding alias for Up/Down branches." << std::endl;
+        df.Alias("FatJet_pt_jesTotalUp", "FatJet_pt")
+          .Alias("FatJet_pt_jesTotalDown", "FatJet_pt")
+          .Alias("FatJet_msoftdrop_jesTotalUp", "FatJet_msoftdrop")
+          .Alias("FatJet_msoftdrop_jesTotalDown", "FatJet_msoftdrop")
+          .Alias("Jet_pt_jesTotalUp", "Jet_pt")
+          .Alias("Jet_pt_jesTotalDown", "Jet_pt");
+    }
 
     std::cout << ">>> Number of events: " << *df.Count() << std::endl;
 
