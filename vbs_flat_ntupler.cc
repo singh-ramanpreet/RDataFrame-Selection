@@ -49,11 +49,11 @@ const float AK8_LEP_DR_CUT = 1.0;
 const float AK4_AK8_DR_CUT = 0.8;
 const float AK4_DR_CUT = 0.3;
 
-void vbs_flat_ntupler(std::string sample, int isMC, int year) {
+void vbs_flat_ntupler(std::string sample, int year) {
 
     gErrorIgnoreLevel = kError;
 
-    ROOT::EnableImplicitMT(4);
+    ROOT::EnableImplicitMT();
     const auto poolSize = ROOT::GetImplicitMTPoolSize();
     std::cout << "Pool size: " << poolSize << std::endl;
 
@@ -85,9 +85,13 @@ void vbs_flat_ntupler(std::string sample, int isMC, int year) {
 
     std::cout << ">>> Number of root files in sample " << sampleList.size() << std::endl;
 
+    ROOT::RDataFrame dfRuns("Runs", sampleList);
+
+    // check if sample is MC or Data
+    const int isMC = dfRuns.HasColumn("genEventCount_");
+
     TH1F *totalEvents = new TH1F("TotalEvents", "TotalEvents", 2, -1, 1);
     if (isMC == 1) {
-        ROOT::RDataFrame dfRuns("Runs", sampleList);
         //genEventCount_ -> Number of Events,
         //genEventSumw_ -> Sum of genWeight,
         //genEventSumw2_ -> Sum of (genWeight *genWeight)

@@ -15,6 +15,12 @@ else
 fi
 
 sample_list_txt=${1}
-isMC=${2}
-year=${3}
-root -q -n -b vbs_flat_ntupler.cc+\(\"${sample_list_txt}\",${isMC},${year}\)
+year=${2}
+eos_output_dir=${3}
+
+root -q -n -b vbs_flat_ntupler.cc+\(\"${sample_list_txt}\",${year}\)
+
+if [[ ! -z "${eos_output_dir}" ]]; then
+    echo ${eos_output_dir}
+    xrdcp *.root root://cmseos.fnal.gov//${eos_output_dir}/.
+fi
