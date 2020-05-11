@@ -36,3 +36,18 @@ YEAR -> sample year
 EOS_DIR (Optional) -> copies .root file to the eos directory, if given.
                       useful when running on condor
 ```
+
+## How to run on HTCondor at lpc
+--------
+
+1. Make the files list as decribed before.
+
+2. Change the parameters in `condor_submit.jdl` (mainly in starting)
+
+3. Make the `log_dir` as set in `.jdl` file.
+
+4. Submit
+
+```bash
+condor_submit condor_submit.jdl
+```
