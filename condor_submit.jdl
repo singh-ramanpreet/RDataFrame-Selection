@@ -1,0 +1,34 @@
+# ======================================
+# Set Parameters
+# make sure the log_dir actually exists 
+# otherwise jobs will be held
+year = 2018
+sample_list_dir = 2018
+log_dir = $(sample_list_dir)_jobs
+eos_output_path = /eos/uscms/store/user/singhr/test/
+
+#request_cpus   = 8
+#request_memory = 5 GB
+# ======================================
+
+universe      = vanilla
+#+DesiredOS   = "SL7"
+x509userproxy = $ENV(X509_USER_PROXY)
+executable    = run.sh
+
+transfer_input  = True
+transfer_output = True
+transfer_input_files = run.sh, vbs_flat_ntupler.cc, $(sample_list_dir)
+
+
+log_filename  = $(log_dir)/$Fn(sample_list_file)_$(Cluster)_$(Process)
+log           = $(log_filename).log
+output        = $(log_filename).out
+error         = $(log_filename).err
+stream_error  = True
+stream_output = True
+
+
+arguments = $(sample_list_file) $(year) $(eos_output_path)
+
+queue sample_list_file matching from $(sample_list_dir)/*.txt

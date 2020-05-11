@@ -22,5 +22,8 @@ root -q -n -b vbs_flat_ntupler.cc+\(\"${sample_list_txt}\",${year}\)
 
 if [[ ! -z "${eos_output_dir}" ]]; then
     echo ${eos_output_dir}
-    xrdcp *.root root://cmseos.fnal.gov//${eos_output_dir}/.
+    xrdfs root://cmseos.fnal.gov/ mkdir -p ${eos_output_dir}
+    xrdcp -f *.root root://cmseos.fnal.gov/${eos_output_dir}/
+    rm *.root
+    rm *docker*
 fi

@@ -436,7 +436,7 @@ void vbs_flat_ntupler(std::string sample, int year) {
                                                              "MET_pt", "MET_phi"})
                     .Define("dilep_p4", dilep_p4, {"lep1_pt", "lep1_eta", "lep1_phi", "lep1_m",
                                                   "lep2_pt", "lep2_eta", "lep2_phi", "lep2_m",
-                                                  "MET_px", "MET_py", "neu_pz_type0", "MET_pt",})
+                                                  "MET_px", "MET_py", "neu_pz_type0", "MET_pt"})
                     .Define("dilep_pt", "dilep_p4[0]")
                     .Define("dilep_eta", "dilep_p4[1]")
                     .Define("dilep_phi", "dilep_p4[2]")
