@@ -110,15 +110,19 @@ void vbs_flat_ntupler(std::string sample, int year) {
         .Alias("Jet_pt_jesTotalDown", "Jet_pt");
   }
 
-  std::cout << ">>> Number of events: " << *df.Count() << std::endl;
+  auto count = df.Count();
+  int total_entries = count.GetValue();
 
-  auto h_count = df.Histo1D({sample_basename.c_str(), sample_basename.c_str(), 1u, 0., 0.}, "event");
-  auto print_entries = [&poolSize](TH1D& h_) {
-    int entries = h_.GetEntries();
-    entries = poolSize == 0 ? entries : poolSize * entries;
-    std::cout << ">>> Entries processed: " << entries << std::endl;
+  std::cout << ">>> Number of events: " << total_entries << std::endl;
+
+  int progress = 0;
+  std::mutex bar_mutex;
+  auto bar_print = [&progress, &bar_mutex](unsigned int, ULong64_t&) {
+    std::lock_guard<std::mutex> lg(bar_mutex);
+    progress += 1;
+    std::cout << ">>> Processed: " << progress << "%" << std::endl;
   };
-  h_count.OnPartialResult(50000, print_entries);
+  count.OnPartialResultSlot(total_entries / 100, bar_print);
 
   auto df2 = df.Filter(
       "HLT_IsoMu24 == true ||\
