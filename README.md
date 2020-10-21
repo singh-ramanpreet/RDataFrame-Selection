@@ -5,13 +5,12 @@
 
 1. **Make sample list**
 
+**Note**: This is optional, run this step only if samples list is old.
+
 `make_sample_list.sh` script takes `eos` path as argument and, looks for directories within and all the root files within each directory will be put into one text file.
-For example, 
+For example, (2nd argument is the subdirectory you want to put the `.txt` files in)
 ```bash
-mkdir 2018
-cd 2018
-./make_sample_list.sh /eos/uscms/.../2018_parent_sample_dir
-cd -
+./make_sample_list.sh /eos/uscms/.../2018_parent_sample_dir 2018
 ```
 will produce
 
