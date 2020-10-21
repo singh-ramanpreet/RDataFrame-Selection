@@ -88,14 +88,15 @@ void vbs_flat_ntupler(std::string sample, int year) {
     ROOT::RDataFrame dfRuns("Runs", sampleList);
 
     // check if sample is MC or Data
-    const int isMC = dfRuns.HasColumn("genEventCount_");
+    const std::string genEventSumw = dfRuns.HasColumn("genEventSumw_")? "genEventSumw_": dfRuns.HasColumn("genEventSumw")? "genEventSumw":"None";
+    const int isMC = dfRuns.HasColumn(genEventSumw);
 
     TH1F *totalEvents = new TH1F("TotalEvents", "TotalEvents", 2, -1, 1);
     if (isMC == 1) {
         //genEventCount_ -> Number of Events,
         //genEventSumw_ -> Sum of genWeight,
         //genEventSumw2_ -> Sum of (genWeight *genWeight)
-        auto genEventCount_ = dfRuns.Sum("genEventCount_").GetValue();
+        auto genEventCount_ = dfRuns.Sum(genEventSumw).GetValue();
         totalEvents->SetBinContent(2, genEventCount_);
     }
 
