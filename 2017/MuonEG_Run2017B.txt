@@ -1,0 +1,8 @@
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2017_v7_18Aug2020_Hadd/MuonEG/Run2017B/200817_180337/27F3E2B9-7840-2042-A4C8-3E761B48FA1A_SkimHadd.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2017_v7_18Aug2020_Hadd/MuonEG/Run2017B/200817_180337/3A73DF2F-4B45-A144-8678-1B94996EE29F_SkimHadd.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2017_v7_18Aug2020_Hadd/MuonEG/Run2017B/200817_180337/3BC26F83-BC26-E94F-8740-776D93C55C03_SkimHadd.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2017_v7_18Aug2020_Hadd/MuonEG/Run2017B/200817_180337/813D5163-6C33-A245-9AC1-86654AF85EE6_SkimHadd.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2017_v7_18Aug2020_Hadd/MuonEG/Run2017B/200817_180337/9962C63C-A571-C049-9D9B-B9622C896D92_SkimHadd.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2017_v7_18Aug2020_Hadd/MuonEG/Run2017B/200817_180337/B64323FB-D7BA-9243-98A2-8457BAFD205F_SkimHadd.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2017_v7_18Aug2020_Hadd/MuonEG/Run2017B/200817_180337/D21D5C57-CE1A-F24C-8ECF-92F1177A9C02_SkimHadd.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2017_v7_18Aug2020_Hadd/MuonEG/Run2017B/200817_180337/F9ED63E3-6EFA-3C4F-8F9B-FBA28D19896A_SkimHadd.root

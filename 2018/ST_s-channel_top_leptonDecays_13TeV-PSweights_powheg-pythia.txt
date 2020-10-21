@@ -1,0 +1,8 @@
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2018_v7_07Sep2020/ST_s-channel_top_leptonDecays_13TeV-PSweights_powheg-pythia/200907_103355/15EEB7FF-D644-5942-84EC-6330D708CC0E_SkimHadd.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2018_v7_07Sep2020/ST_s-channel_top_leptonDecays_13TeV-PSweights_powheg-pythia/200907_103355/17C7B3A2-6D66-B040-8623-784F0A6BF8CA_SkimHadd.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2018_v7_07Sep2020/ST_s-channel_top_leptonDecays_13TeV-PSweights_powheg-pythia/200907_103355/2F85759E-B67E-8546-A804-9B79CC9AE1A6_SkimHadd.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2018_v7_07Sep2020/ST_s-channel_top_leptonDecays_13TeV-PSweights_powheg-pythia/200907_103355/2FD2CF3E-2270-4743-892A-BCA4EE2D212B_SkimHadd.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2018_v7_07Sep2020/ST_s-channel_top_leptonDecays_13TeV-PSweights_powheg-pythia/200907_103355/477BE6F9-E955-C347-9B46-52D690C52C53_SkimHadd.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2018_v7_07Sep2020/ST_s-channel_top_leptonDecays_13TeV-PSweights_powheg-pythia/200907_103355/489D380D-BD21-2B49-AD1D-BC4566348E97_SkimHadd.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2018_v7_07Sep2020/ST_s-channel_top_leptonDecays_13TeV-PSweights_powheg-pythia/200907_103355/73C148A4-F4E5-8846-9EDB-60FCC812AAA2_SkimHadd.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2018_v7_07Sep2020/ST_s-channel_top_leptonDecays_13TeV-PSweights_powheg-pythia/200907_103355/DB7354C3-31A8-F64E-8FAF-FF1C85892A2D_SkimHadd.root

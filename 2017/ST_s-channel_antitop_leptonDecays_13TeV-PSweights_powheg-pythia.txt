@@ -1,0 +1,4 @@
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2017_v7_18Aug2020_Hadd/ST_s-channel_antitop_leptonDecays_13TeV-PSweights_powheg-pythia/200817_180337/0D28D366-7953-114B-B5BB-678F9F8EE610_SkimHadd.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2017_v7_18Aug2020_Hadd/ST_s-channel_antitop_leptonDecays_13TeV-PSweights_powheg-pythia/200817_180337/A37BB242-80F0-8D49-88AB-AD8595564301_SkimHadd.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2017_v7_18Aug2020_Hadd/ST_s-channel_antitop_leptonDecays_13TeV-PSweights_powheg-pythia/200817_180337/B5603FA4-29A8-5740-97C8-2E5D047DAFB3_SkimHadd.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2017_v7_18Aug2020_Hadd/ST_s-channel_antitop_leptonDecays_13TeV-PSweights_powheg-pythia/200817_180337/E8200C4F-70D2-D944-8423-B41B819BD7C5_SkimHadd.root

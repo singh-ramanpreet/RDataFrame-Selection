@@ -1,0 +1,11 @@
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2016_v7_6July2020/WWW_4F_DiLeptonFilter_TuneCUETP8M1_13TeV-amcatnlo-pythia8/200713_094805/041C3287-43DC-3746-91BA-696F65B1F49A_Skim.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2016_v7_6July2020/WWW_4F_DiLeptonFilter_TuneCUETP8M1_13TeV-amcatnlo-pythia8/200713_094805/14F2B4F9-20E2-E347-93BB-7FF7210A13FA_Skim.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2016_v7_6July2020/WWW_4F_DiLeptonFilter_TuneCUETP8M1_13TeV-amcatnlo-pythia8/200713_094805/24B45629-FDEF-ED48-999E-F06F6E68E5BC_Skim.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2016_v7_6July2020/WWW_4F_DiLeptonFilter_TuneCUETP8M1_13TeV-amcatnlo-pythia8/200713_094805/384F6BD4-2987-C049-984D-0764A2BC72A4_Skim.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2016_v7_6July2020/WWW_4F_DiLeptonFilter_TuneCUETP8M1_13TeV-amcatnlo-pythia8/200713_094805/40ACB5F7-5B30-B740-826E-7F548BAE38BA_Skim.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2016_v7_6July2020/WWW_4F_DiLeptonFilter_TuneCUETP8M1_13TeV-amcatnlo-pythia8/200713_094805/4C90B3DB-947E-DF4B-BD61-F01876D446CB_Skim.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2016_v7_6July2020/WWW_4F_DiLeptonFilter_TuneCUETP8M1_13TeV-amcatnlo-pythia8/200713_094805/4EFC65C2-0413-2E41-8FF4-ACF3285789EE_Skim.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2016_v7_6July2020/WWW_4F_DiLeptonFilter_TuneCUETP8M1_13TeV-amcatnlo-pythia8/200713_094805/5E9C6424-2482-F948-8A42-218DE1F06904_Skim.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2016_v7_6July2020/WWW_4F_DiLeptonFilter_TuneCUETP8M1_13TeV-amcatnlo-pythia8/200713_094805/5F1047F2-3DAB-EA48-873B-E1990293CCD5_Skim.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2016_v7_6July2020/WWW_4F_DiLeptonFilter_TuneCUETP8M1_13TeV-amcatnlo-pythia8/200713_094805/8A68027E-0555-7D42-81D2-FF04FD1F7D7E_Skim.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2016_v7_6July2020/WWW_4F_DiLeptonFilter_TuneCUETP8M1_13TeV-amcatnlo-pythia8/200713_094805/9B9356B9-A0A4-AE43-B711-3339A0D74EFB_Skim.root

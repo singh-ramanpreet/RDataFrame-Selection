@@ -1,0 +1,16 @@
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2016_v7_6July2020/DoubleMuon/Run2016F/200706_104546/02E6F538-2BAA-944E-9A34-F941A8D9AE22_Skim.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2016_v7_6July2020/DoubleMuon/Run2016F/200706_104546/0884F360-9F83-F848-9FF3-D7FBCFC974B3_Skim.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2016_v7_6July2020/DoubleMuon/Run2016F/200706_104546/0D9111C4-1B43-7A42-B6A9-51124BF2D7A9_Skim.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2016_v7_6July2020/DoubleMuon/Run2016F/200706_104546/2BCE59F9-BFDD-BF42-8E2F-3CD6B927D2D9_Skim.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2016_v7_6July2020/DoubleMuon/Run2016F/200706_104546/45BF63F0-CAFF-7D42-9133-494F4BAFC354_Skim.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2016_v7_6July2020/DoubleMuon/Run2016F/200706_104546/5311D2F4-D509-454B-9503-3EFC6A77C250_Skim.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2016_v7_6July2020/DoubleMuon/Run2016F/200706_104546/562CEC54-D197-694A-B371-7B27A1A65E7B_Skim.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2016_v7_6July2020/DoubleMuon/Run2016F/200706_104546/57F5819F-C2F2-9B43-9FB8-BFE1749C1E9B_Skim.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2016_v7_6July2020/DoubleMuon/Run2016F/200706_104546/5B2974A4-8A55-DB48-BDF5-D990A55F502A_Skim.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2016_v7_6July2020/DoubleMuon/Run2016F/200706_104546/7B81E02C-A1CF-4144-9FD5-43585BBACD89_Skim.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2016_v7_6July2020/DoubleMuon/Run2016F/200706_104546/933162BC-1A6D-CA4C-9A08-73E4E7E2675E_Skim.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2016_v7_6July2020/DoubleMuon/Run2016F/200706_104546/95114588-27B5-A048-8F8E-C6555819CFDF_Skim.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2016_v7_6July2020/DoubleMuon/Run2016F/200706_104546/9FE5870B-3D9B-8C41-8DF8-AAD266C40418_Skim.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2016_v7_6July2020/DoubleMuon/Run2016F/200706_104546/A47C24B2-A478-D74E-956A-54AA3B5481AA_Skim.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2016_v7_6July2020/DoubleMuon/Run2016F/200706_104546/C541EA21-5986-DD4A-B129-6A55C287B85C_Skim.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2016_v7_6July2020/DoubleMuon/Run2016F/200706_104546/FC5A7C2A-E475-FB4E-B1A7-4B810DB6A044_Skim.root

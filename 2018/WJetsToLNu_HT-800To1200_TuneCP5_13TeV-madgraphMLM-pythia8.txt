@@ -1,0 +1,17 @@
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2018_v7_07Sep2020/WJetsToLNu_HT-800To1200_TuneCP5_13TeV-madgraphMLM-pythia8/200907_103355/1BE3A5E9-D914-A143-A53F-45A65DB82E9D_SkimHadd.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2018_v7_07Sep2020/WJetsToLNu_HT-800To1200_TuneCP5_13TeV-madgraphMLM-pythia8/200907_103355/2E0F066E-7671-FA4C-A326-4093986A23E6_SkimHadd.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2018_v7_07Sep2020/WJetsToLNu_HT-800To1200_TuneCP5_13TeV-madgraphMLM-pythia8/200907_103355/4141675D-34FF-044B-BCA8-B7722698F139_SkimHadd.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2018_v7_07Sep2020/WJetsToLNu_HT-800To1200_TuneCP5_13TeV-madgraphMLM-pythia8/200907_103355/420D2314-03BA-7144-8F7F-E905AA8220BC_SkimHadd.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2018_v7_07Sep2020/WJetsToLNu_HT-800To1200_TuneCP5_13TeV-madgraphMLM-pythia8/200907_103355/4C46BD1E-58FC-2443-A275-C58212556816_SkimHadd.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2018_v7_07Sep2020/WJetsToLNu_HT-800To1200_TuneCP5_13TeV-madgraphMLM-pythia8/200907_103355/64841D90-D0EE-7847-96A8-DD72604DAA9B_SkimHadd.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2018_v7_07Sep2020/WJetsToLNu_HT-800To1200_TuneCP5_13TeV-madgraphMLM-pythia8/200907_103355/7D02E9A9-5D01-2443-9E7E-D5A84477F517_SkimHadd.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2018_v7_07Sep2020/WJetsToLNu_HT-800To1200_TuneCP5_13TeV-madgraphMLM-pythia8/200907_103355/869409C3-7748-3B49-84EF-E615834FF8FD_SkimHadd.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2018_v7_07Sep2020/WJetsToLNu_HT-800To1200_TuneCP5_13TeV-madgraphMLM-pythia8/200907_103355/A79DD2BF-DE4D-E749-9D9A-CF419B69F38F_SkimHadd.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2018_v7_07Sep2020/WJetsToLNu_HT-800To1200_TuneCP5_13TeV-madgraphMLM-pythia8/200907_103355/AA034909-E04D-334C-9F71-379E6C9E6DAC_SkimHadd.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2018_v7_07Sep2020/WJetsToLNu_HT-800To1200_TuneCP5_13TeV-madgraphMLM-pythia8/200907_103355/B490C3E1-151F-6843-8FF5-A3378825D8EB_SkimHadd.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2018_v7_07Sep2020/WJetsToLNu_HT-800To1200_TuneCP5_13TeV-madgraphMLM-pythia8/200907_103355/C01A7A76-ABA1-6E43-B279-AAA75F7702F0_SkimHadd.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2018_v7_07Sep2020/WJetsToLNu_HT-800To1200_TuneCP5_13TeV-madgraphMLM-pythia8/200907_103355/C5A2E178-90DD-2C4F-9730-49C09AF4A6D2_SkimHadd.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2018_v7_07Sep2020/WJetsToLNu_HT-800To1200_TuneCP5_13TeV-madgraphMLM-pythia8/200907_103355/C5A5E779-5192-5949-B3BF-D686F538CCCE_SkimHadd.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2018_v7_07Sep2020/WJetsToLNu_HT-800To1200_TuneCP5_13TeV-madgraphMLM-pythia8/200907_103355/D836A362-8F11-FD4E-9C64-C29D18EF9815_SkimHadd.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2018_v7_07Sep2020/WJetsToLNu_HT-800To1200_TuneCP5_13TeV-madgraphMLM-pythia8/200907_103355/E19BFE3C-1B80-8F44-B735-F4C2B36C53EA_SkimHadd.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2018_v7_07Sep2020/WJetsToLNu_HT-800To1200_TuneCP5_13TeV-madgraphMLM-pythia8/200907_103355/E1A8B1C5-CF7D-DE45-A73D-4921AE9BB0DB_SkimHadd.root

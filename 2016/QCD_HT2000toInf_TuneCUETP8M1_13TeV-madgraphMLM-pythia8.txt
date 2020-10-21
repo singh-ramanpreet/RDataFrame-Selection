@@ -1,0 +1,11 @@
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2016_v7_6July2020/QCD_HT2000toInf_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/200713_094805/189A3FE2-4387-2848-A784-CFA00BC0A0FF_Skim.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2016_v7_6July2020/QCD_HT2000toInf_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/200713_094805/195F97A5-0E4E-DC4B-8F25-AA2C6AE4FCAB_Skim.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2016_v7_6July2020/QCD_HT2000toInf_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/200713_094805/32852884-B6FC-2E4D-A6E0-0916A5BD4D36_Skim.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2016_v7_6July2020/QCD_HT2000toInf_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/200713_094805/4B8CAB88-8E8F-5544-A125-301CCD373940_Skim.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2016_v7_6July2020/QCD_HT2000toInf_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/200713_094805/5C07EA76-5479-D042-BE17-2A55EE0F5846_Skim.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2016_v7_6July2020/QCD_HT2000toInf_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/200713_094805/6611BA3F-84D0-E14D-A9E0-FF3C2229DD36_Skim.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2016_v7_6July2020/QCD_HT2000toInf_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/200713_094805/7808FF3C-7495-5741-8502-927C8FA25906_Skim.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2016_v7_6July2020/QCD_HT2000toInf_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/200713_094805/99B41AD5-ABB6-5E49-92A1-A944CA070E4C_Skim.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2016_v7_6July2020/QCD_HT2000toInf_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/200713_094805/9CF80FEA-0A64-5044-9B61-E235B04BEABA_Skim.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2016_v7_6July2020/QCD_HT2000toInf_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/200713_094805/F50168F0-0519-1F4B-B4CB-FF336027ACF3_Skim.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2016_v7_6July2020/QCD_HT2000toInf_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/200713_094805/FABE18F2-738F-5D47-B989-CD7BD894F112_Skim.root

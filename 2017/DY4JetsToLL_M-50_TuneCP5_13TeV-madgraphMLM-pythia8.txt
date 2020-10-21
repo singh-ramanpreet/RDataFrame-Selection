@@ -1,0 +1,12 @@
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2017_v7_18Aug2020_Hadd/DY4JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/200817_180337/16D19F54-3B7B-6243-98CC-0869480B216D_SkimHadd.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2017_v7_18Aug2020_Hadd/DY4JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/200817_180337/195076C2-2804-2247-8EB8-9F318F43ED11_SkimHadd.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2017_v7_18Aug2020_Hadd/DY4JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/200817_180337/1DB719E9-36D6-BC40-8D71-8F5CB846CC85_SkimHadd.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2017_v7_18Aug2020_Hadd/DY4JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/200817_180337/2151CD10-5935-A749-9A7E-CE886F81CFE8_SkimHadd.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2017_v7_18Aug2020_Hadd/DY4JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/200817_180337/29AC3287-2C3B-644F-8AE7-0F4D61032931_SkimHadd.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2017_v7_18Aug2020_Hadd/DY4JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/200817_180337/4BC79351-7DBE-2547-B157-B8D3C6282CAB_SkimHadd.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2017_v7_18Aug2020_Hadd/DY4JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/200817_180337/5910EEC3-5763-9F4E-A32E-D67ECDAAF7B2_SkimHadd.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2017_v7_18Aug2020_Hadd/DY4JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/200817_180337/6388DA42-2327-3B48-B1A1-70CAE680B3F8_SkimHadd.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2017_v7_18Aug2020_Hadd/DY4JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/200817_180337/7539EE39-19BE-5143-8732-9B4517358D29_SkimHadd.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2017_v7_18Aug2020_Hadd/DY4JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/200817_180337/82CB812B-A2E9-784C-A362-4D57F92C82D6_SkimHadd.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2017_v7_18Aug2020_Hadd/DY4JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/200817_180337/CE17C0A4-DA5D-364A-B674-7855E7F4A111_SkimHadd.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2017_v7_18Aug2020_Hadd/DY4JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/200817_180337/F05253C3-0492-8843-9AB7-4859B45DD239_SkimHadd.root

@@ -1,0 +1,4 @@
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2016_v7_6July2020/SingleMuon/Run2016B/200706_104546/00E9BECB-48DF-A148-9B0F-AB37970970EE_Skim.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2016_v7_6July2020/SingleMuon/Run2016B/200706_104546/664FE470-376B-1C43-99F2-F3D4613BE9FD_Skim.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2016_v7_6July2020/SingleMuon/Run2016B/200706_104546/D50E7ED4-5629-0549-A255-BB395B6A65C1_Skim.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2016_v7_6July2020/SingleMuon/Run2016B/200706_104546/DDF53AB9-03EC-3A4C-82D4-C2F8B87A62BF_Skim.root

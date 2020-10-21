@@ -1,0 +1,3 @@
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2018_v7_07Sep2020/WWW_4F_DiLeptonFilter_TuneCP5_13TeV-amcatnlo-pythia8/200907_103355/1844D9EC-1FAE-574E-A900-8C2D920D312D_SkimHadd.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2018_v7_07Sep2020/WWW_4F_DiLeptonFilter_TuneCP5_13TeV-amcatnlo-pythia8/200907_103355/4908B8CF-679F-0149-8CB8-AE995BDC4F2E_SkimHadd.root
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2018_v7_07Sep2020/WWW_4F_DiLeptonFilter_TuneCP5_13TeV-amcatnlo-pythia8/200907_103355/792D2F59-90F7-7148-BA7A-6AAC7B642995_SkimHadd.root

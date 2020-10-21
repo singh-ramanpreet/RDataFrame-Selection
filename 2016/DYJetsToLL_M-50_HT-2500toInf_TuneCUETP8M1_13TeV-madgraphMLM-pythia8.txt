@@ -1,0 +1,1 @@
+/eos/uscms/store/user/lnujj/VVjj_aQGC/nanoAOD_skim/Run2016_v7_6July2020/DYJetsToLL_M-50_HT-2500toInf_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/200713_094805/3F843ACE-15B1-4C4D-AC20-B5C760A95458_Skim.root
