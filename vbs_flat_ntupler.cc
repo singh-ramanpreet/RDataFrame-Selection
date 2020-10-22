@@ -151,6 +151,10 @@ void vbs_flat_ntupler(std::string sample, int year) {
                   .Filter("!(nTightMuons == 1 && nVetoMuons > 1)", "more than ??")
                   .Filter("!(nTightElectrons == 1 && nVetoElectrons > 1)", "more than ??");
 
+  //function: determine index of selected lepton
+  //... first sorted in pt
+  //... returned two indexes
+  //... -1 => not selected
   auto lepton_idx = [](RVec<int>& tightLeptons, RVec<float>& pt) {
     auto pt_sorted_indices = Reverse(Argsort(pt));
 
@@ -168,6 +172,9 @@ void vbs_flat_ntupler(std::string sample, int year) {
 
   chainedDf = chainedDf.Define("mu_idx", lepton_idx, {"tightMuons", "Muon_pt"}).Define("ele_idx", lepton_idx, {"tightElectrons", "Electron_pt"});
 
+  //function: determine clean fatjets
+  //... clean w.r.t muons and, electrons
+  //... returned fatjets Id
   auto cleanedFatJets = [](RVec<int>& fj_id,
                            RVec<float>& fj_eta,
                            RVec<float>& fj_phi,
@@ -200,6 +207,8 @@ void vbs_flat_ntupler(std::string sample, int year) {
     return cleanedFatJets_;
   };
 
+  //Define which fatjets are good and clean
+  //... no selection
   chainedDf =
       chainedDf
           .Define("goodFatJets",
@@ -215,6 +224,9 @@ void vbs_flat_ntupler(std::string sample, int year) {
               cleanedFatJets,
               {"goodFatJets", "FatJet_eta", "FatJet_phi", "tightMuons", "Muon_eta", "Muon_phi", "tightElectrons", "Electron_eta", "Electron_phi"});
 
+  //function: determine selected fatjet index
+  //... returned index
+  //... -1 => no fatjet selected
   auto selectedFatJet_idx = [](RVec<int>& fj_id, RVec<float>& fj_m) {
     int idx = -1;
     if (Sum(fj_id) > 0) {
@@ -224,8 +236,14 @@ void vbs_flat_ntupler(std::string sample, int year) {
     return idx;
   };
 
+  //Define selected fatjet index
+  //... no selection
   chainedDf = chainedDf.Define("selectedFatJet_idx", selectedFatJet_idx, {"goodCleanedFatJets", "FatJet_msoftdrop"});
 
+  //function: determine clean jets
+  //... w.r.t. muons, electrons, fatjet
+  //... and with other jets
+  //... returned clean jets ID
   auto cleanedJets = [](RVec<int>& jt_id,
                         RVec<float>& jt_eta,
                         RVec<float>& jt_phi,
@@ -277,6 +295,10 @@ void vbs_flat_ntupler(std::string sample, int year) {
     return cleanedJets_;
   };
 
+  //Define good jets
+  //Define number of btags, various IDs
+  //Define goog and clean jets IDs
+  //Select Events with atleast two jets
   chainedDf = chainedDf
                   .Define("goodJets",
                           "Jet_pt > AK4_PT_CUT ||\
@@ -307,6 +329,12 @@ void vbs_flat_ntupler(std::string sample, int year) {
                            "Electron_phi"})
                   .Filter("Sum(goodCleanedJets) > 2", "at least 2 AK4 cleaned jets");
 
+  //function: determine selected jets indexes
+  //... first figure out event is boosted or resolved
+  //... if boosted, selected highest mjj vbf jets
+  //... if resolved first select hadronic jets
+  //... ... then mjj vbj jets
+  //... returned indexes {boson jet1,jet2,vbf jet1, jet2 }
   auto selectedJets_idx = [](int selected_fj, RVec<int> jt_id, RVec<float> jt_pt, RVec<float> jt_eta, RVec<float> jt_phi, RVec<float> jt_m) {
     auto idx = Combinations(jt_id, 2);
     auto jt_pt_1 = Take(jt_pt, idx[0]);
@@ -362,6 +390,8 @@ void vbs_flat_ntupler(std::string sample, int year) {
     return RVec<int>{selected_bos_j1, selected_bos_j2, selected_vbf_j1, selected_vbf_j2};
   };
 
+  //Define selected jets indexes
+  //Apply boosted or resolved Filter
   chainedDf =
       chainedDf.Define("selectedJets_idx", selectedJets_idx, {"selectedFatJet_idx", "goodCleanedJets", "Jet_pt", "Jet_eta", "Jet_phi", "Jet_mass"})
           .Define("bos_j1", "selectedJets_idx[0]")
@@ -375,6 +405,8 @@ void vbs_flat_ntupler(std::string sample, int year) {
           .Filter("vbf_j1 != -1", "has selected AK4 vbf 1")
           .Filter("vbf_j2 != -1", "has selected AK4 vbf 2");
 
+  //== METz Calculator ==
+  //====== START ========
   int metz_type = 0;
   auto METzCalculator = [&metz_type](float l_pt, float l_eta, float l_phi, float l_m, float met_pt, float met_phi) {
     auto isComplex_ = false;
@@ -447,6 +479,13 @@ void vbs_flat_ntupler(std::string sample, int year) {
     return float(pznu);
   };
 
+  //== METz Calculator ==
+  //======= END =========
+
+  // function: Calculate p4 vector for di-leptons
+  // ... W -> lepton + MET
+  // ... Z -> lepton + lepton same flavor
+  // ... returned RVec pt, eta, phi, M
   auto dilep_p4 = [](float l_pt1,
                      float l_eta1,
                      float l_phi1,
@@ -478,6 +517,11 @@ void vbs_flat_ntupler(std::string sample, int year) {
     return RVec<double>{dilep_.Pt(), dilep_.Eta(), dilep_.Phi(), dilep_.M()};
   };
 
+  //Collect list of output variables
+  std::vector<std::string> finalVariables;
+  finalVariables.push_back("run");
+
+  //Some Utils
   TString select_lepton1 = "mu_idx[0] != -1? %s[mu_idx[0]]: ele_idx[0] != -1? %s[ele_idx[0]]: -999.f";
   TString select_lepton2 = "mu_idx[1] != -1? %s[mu_idx[1]]: ele_idx[1] != -1? %s[ele_idx[1]]: -999.f";
 
@@ -551,7 +595,6 @@ void vbs_flat_ntupler(std::string sample, int year) {
   dfFinal.Snapshot("Events", outputFileName, finalVariables);
 
   report->Print();
-  //h_count->Print();
 
   TFile* outFile = TFile::Open(outputFileName.c_str(), "update");
   outFile->cd();
