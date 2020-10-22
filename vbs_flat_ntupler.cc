@@ -110,6 +110,26 @@ void vbs_flat_ntupler(std::string sample, int year) {
         .Alias("Jet_pt_jesTotalDown", "Jet_pt");
   }
 
+  //Load stuff, different for different year
+  //1. Triggers
+  //2. Read histograms as const for lookup
+  if (year == 2018) {
+    auto f_mu_SF_ID = TFile::Open("./data/SF2018/Muon_Run2018ABCD_SF_ID.root", "read");
+    const TH2D* h_mu_SF_ID = (TH2D*)f_mu_SF_ID->Get("NUM_TightID_DEN_TrackerMuons_pt_abseta");
+
+    auto f_mu_SF_ISO = TFile::Open("./data/SF2018/Muon_Run2018ABCD_SF_ISO.root", "read");
+    const TH2D* h_mu_SF_ISO = (TH2D*)f_mu_SF_ISO->Get("NUM_TightRelIso_DEN_TightIDandIPCut_pt_abseta");
+
+    auto f_ele_SF_IDIso = TFile::Open("./data/SF2018/2018_ElectronMVA90.root", "read");
+    const TH2D* h_ele_SF_IDIso = (TH2D*)f_ele_SF_IDIso->Get("EGamma_SF2D");
+
+    auto f_mu_FR = TFile::Open("data/SF2018/MuonFR_jet30.root", "read");
+    const TH2D* h_mu_FR = (TH2D*)f_mu_FR->Get("FR_pT_eta");
+
+    auto f_ele_FR = TFile::Open("data/SF2018/EleFR_jet30.root", "read");
+    const TH2D* h_ele_FR = (TH2D*)f_ele_FR->Get("FR_pT_eta");
+  }
+
   auto count = df.Count();
   int total_entries = count.GetValue();
 
@@ -525,66 +545,79 @@ void vbs_flat_ntupler(std::string sample, int year) {
   TString select_lepton1 = "mu_idx[0] != -1? %s[mu_idx[0]]: ele_idx[0] != -1? %s[ele_idx[0]]: -999.f";
   TString select_lepton2 = "mu_idx[1] != -1? %s[mu_idx[1]]: ele_idx[1] != -1? %s[ele_idx[1]]: -999.f";
 
-  chainedDf =
-      chainedDf.Define("evt", "event")
-          .Define("lep1_m", "mu_idx[0] != -1? MUON_MASS: ele_idx[0] != -1? ELE_MASS: -999.f")
-          .Define("lep2_m", "mu_idx[1] != -1? MUON_MASS: ele_idx[1] != -1? ELE_MASS: -999.f")
-          .Define("lep1_pt", Form(select_lepton1, "Muon_pt", "Electron_pt"))
-          .Define("lep1_eta", Form(select_lepton1, "Muon_eta", "Electron_eta"))
-          .Define("lep1_phi", Form(select_lepton1, "Muon_phi", "Electron_phi"))
-          .Define("lep1_q", Form(select_lepton1, "Muon_charge", "Electron_charge"))
-          .Define("lep1_iso", Form(select_lepton1, "Muon_pfRelIso04_all", "Electron_pfRelIso03_all"))
+  //Define output variables for ntuples
+  //do not define already existing variables
+  //and save in std vector of strings 'finalVariables'
+  chainedDf = chainedDf.Define("evt", "event");
+  finalVariables.push_back("evt");
 
-          .Define("lep2_pt", Form(select_lepton2, "Muon_pt", "Electron_pt"))
-          .Define("lep2_eta", Form(select_lepton2, "Muon_eta", "Electron_eta"))
-          .Define("lep2_phi", Form(select_lepton2, "Muon_phi", "Electron_phi"))
-          .Define("lep2_q", Form(select_lepton2, "Muon_charge", "Electron_charge"))
-          .Define("lep2_iso", Form(select_lepton2, "Muon_pfRelIso04_all", "Electron_pfRelIso03_all"))
+  chainedDf = chainedDf.Define("lep1_m", "mu_idx[0] != -1? MUON_MASS: ele_idx[0] != -1? ELE_MASS: -999.f");
+  finalVariables.push_back("lep1_m");
+  chainedDf = chainedDf.Define("lep2_m", "mu_idx[1] != -1? MUON_MASS: ele_idx[1] != -1? ELE_MASS: -999.f");
+  finalVariables.push_back("lep2_m");
 
-          .Define("MET_px", "MET_pt * cos(MET_phi)")
-          .Define("MET_py", "MET_pt * sin(MET_phi)")
-          .Define("neu_pz_type0", METzCalculator, {"lep1_pt", "lep1_eta", "lep1_phi", "lep1_m", "MET_pt", "MET_phi"})
-          .Define(
-              "dilep_p4",
-              dilep_p4,
-              {"lep1_pt", "lep1_eta", "lep1_phi", "lep1_m", "lep2_pt", "lep2_eta", "lep2_phi", "lep2_m", "MET_px", "MET_py", "neu_pz_type0", "MET_pt"})
-          .Define("dilep_pt", "dilep_p4[0]")
-          .Define("dilep_eta", "dilep_p4[1]")
-          .Define("dilep_phi", "dilep_p4[2]")
-          .Define("dilep_m", "dilep_p4[3]")
+  chainedDf = chainedDf.Define("lep1_pt", Form(select_lepton1, "Muon_pt", "Electron_pt"));
+  finalVariables.push_back("lep1_pt");
+  chainedDf = chainedDf.Define("lep1_eta", Form(select_lepton1, "Muon_eta", "Electron_eta"));
+  finalVariables.push_back("lep1_eta");
+  chainedDf = chainedDf.Define("lep1_phi", Form(select_lepton1, "Muon_phi", "Electron_phi"));
+  finalVariables.push_back("lep1_phi");
+  chainedDf = chainedDf.Define("lep1_q", Form(select_lepton1, "Muon_charge", "Electron_charge"));
+  finalVariables.push_back("lep1_q");
+  chainedDf = chainedDf.Define("lep1_iso", Form(select_lepton1, "Muon_pfRelIso04_all", "Electron_pfRelIso03_all"));
+  finalVariables.push_back("lep1_iso");
 
-          .Define("bos_PuppiAK8_m_sd0_corr", "selectedFatJet_idx > -1? FatJet_msoftdrop[selectedFatJet_idx]: -999.f")
-          .Define("bos_PuppiAK8_pt", "selectedFatJet_idx > -1? FatJet_pt[selectedFatJet_idx]: -999.f");
+  chainedDf = chainedDf.Define("lep2_pt", Form(select_lepton2, "Muon_pt", "Electron_pt"));
+  finalVariables.push_back("lep2_pt");
+  chainedDf = chainedDf.Define("lep2_eta", Form(select_lepton2, "Muon_eta", "Electron_eta"));
+  finalVariables.push_back("lep2_eta");
+  chainedDf = chainedDf.Define("lep2_phi", Form(select_lepton2, "Muon_phi", "Electron_phi"));
+  finalVariables.push_back("lep2_phi");
+  chainedDf = chainedDf.Define("lep2_q", Form(select_lepton2, "Muon_charge", "Electron_charge"));
+  finalVariables.push_back("lep2_q");
+  chainedDf = chainedDf.Define("lep2_iso", Form(select_lepton2, "Muon_pfRelIso04_all", "Electron_pfRelIso03_all"));
+  finalVariables.push_back("lep2_iso");
 
-  const std::vector<std::string> finalVariables = {
-      "run",
-      "evt",
-      "lep1_pt",
-      "lep1_eta",
-      "lep1_phi",
-      "lep1_m",
-      "lep1_q",
-      "lep1_iso",
-      "lep2_pt",
-      "lep2_eta",
-      "lep2_phi",
-      "lep2_m",
-      "lep2_q",
-      "lep2_iso",
-      "MET_pt",
-      "MET_phi",
-      "neu_pz_type0",
-      "dilep_pt",
-      "dilep_eta",
-      "dilep_phi",
-      "dilep_m",
-      "bos_PuppiAK8_m_sd0_corr",
-      "bos_PuppiAK8_pt",
+  finalVariables.push_back("MET_pt");
+  finalVariables.push_back("MET_phi");
+  chainedDf = chainedDf.Define("MET_px", "MET_pt * cos(MET_phi)");
+  chainedDf = chainedDf.Define("MET_py", "MET_pt * sin(MET_phi)");
+  chainedDf = chainedDf.Define("neu_pz_type0", METzCalculator, {"lep1_pt", "lep1_eta", "lep1_phi", "lep1_m", "MET_pt", "MET_phi"});
+  finalVariables.push_back("neu_pz_type0");
 
-      "nBtag_loose",
-      "nBtag_medium",
-      "nBtag_tight",
-  };
+  chainedDf = chainedDf.Define(
+      "dilep_p4",
+      dilep_p4,
+      {"lep1_pt", "lep1_eta", "lep1_phi", "lep1_m", "lep2_pt", "lep2_eta", "lep2_phi", "lep2_m", "MET_px", "MET_py", "neu_pz_type0", "MET_pt"});
+  chainedDf = chainedDf.Define("dilep_pt", "dilep_p4[0]");
+  finalVariables.push_back("dilep_pt");
+  chainedDf = chainedDf.Define("dilep_eta", "dilep_p4[1]");
+  finalVariables.push_back("dilep_eta");
+  chainedDf = chainedDf.Define("dilep_phi", "dilep_p4[2]");
+  finalVariables.push_back("dilep_phi");
+  chainedDf = chainedDf.Define("dilep_m", "dilep_p4[3]");
+  finalVariables.push_back("dilep_m");
+
+  chainedDf = chainedDf.Define("bos_PuppiAK8_m_sd0_corr", "selectedFatJet_idx > -1? FatJet_msoftdrop[selectedFatJet_idx]: -999.f");
+  finalVariables.push_back("bos_PuppiAK8_m_sd0_corr");
+  chainedDf = chainedDf.Define("bos_PuppiAK8_pt", "selectedFatJet_idx > -1? FatJet_pt[selectedFatJet_idx]: -999.f");
+  finalVariables.push_back("bos_PuppiAK8_pt");
+
+  finalVariables.push_back("nBtag_loose");
+  finalVariables.push_back("nBtag_medium");
+  finalVariables.push_back("nBtag_tight");
+
+  if (isMC == 1) {
+    chainedDf = chainedDf.Define("nScaleWeight", "nLHEScaleWeight");
+    chainedDf = chainedDf.Define("scaleWeight", "LHEScaleWeight");
+    finalVariables.push_back("nScaleWeight");
+    finalVariables.push_back("scaleWeight");
+
+    chainedDf = chainedDf.Define("nPdfWeight", "nLHEPdfWeight");
+    chainedDf = chainedDf.Define("pdfWeight", "LHEPdfWeight");
+    finalVariables.push_back("nPdfWeight");
+    finalVariables.push_back("pdfWeight");
+  }
 
   auto outputFileName = sample_basename + ".root";
   std::cout << ">>> Output Filename: " << outputFileName << std::endl;
