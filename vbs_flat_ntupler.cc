@@ -124,7 +124,9 @@ void vbs_flat_ntupler(std::string sample, int year) {
   };
   count.OnPartialResultSlot(total_entries / 100, bar_print);
 
-  auto df2 = df.Filter(
+  // chain dataframes in sequential order
+  auto chainedDf = ROOT::RDF::RNode(df);
+  chainedDf = chainedDf.Filter(
       "HLT_IsoMu24 == true ||\
                           HLT_IsoMu27 == true ||\
                           HLT_Ele27_WPTight_Gsf == true ||\
@@ -132,22 +134,22 @@ void vbs_flat_ntupler(std::string sample, int year) {
                           HLT_Ele35_WPTight_Gsf == true",
       "Passes trigger");
 
-  auto df3 = df2.Define("vetoMuons", "Muon_pt > LEP_PT_VETO_CUT && Muon_looseId == true")
-                 .Define("tightMuons", "abs(Muon_eta) < MU_ETA_CUT && Muon_pt > MU_PT_CUT && Muon_tightId == true")
-                 .Define("nVetoMuons", "Sum(vetoMuons)")
-                 .Define("nTightMuons", "Sum(tightMuons)");
+  chainedDf = chainedDf.Define("vetoMuons", "Muon_pt > LEP_PT_VETO_CUT && Muon_looseId == true")
+                  .Define("tightMuons", "abs(Muon_eta) < MU_ETA_CUT && Muon_pt > MU_PT_CUT && Muon_tightId == true")
+                  .Define("nVetoMuons", "Sum(vetoMuons)")
+                  .Define("nTightMuons", "Sum(tightMuons)");
 
-  auto df4 = df3.Define("vetoElectrons", "Electron_pt > LEP_PT_VETO_CUT && Electron_cutBased == 1")
-                 .Define("tightElectrons", "abs(Electron_eta) < EL_ETA_CUT && Electron_pt > EL_PT_CUT && Electron_cutBased == 4")
-                 .Define("nVetoElectrons", "Sum(vetoElectrons)")
-                 .Define("nTightElectrons", "Sum(tightElectrons)");
+  chainedDf = chainedDf.Define("vetoElectrons", "Electron_pt > LEP_PT_VETO_CUT && Electron_cutBased == 1")
+                  .Define("tightElectrons", "abs(Electron_eta) < EL_ETA_CUT && Electron_pt > EL_PT_CUT && Electron_cutBased == 4")
+                  .Define("nVetoElectrons", "Sum(vetoElectrons)")
+                  .Define("nTightElectrons", "Sum(tightElectrons)");
 
-  auto df5 = df4.Filter("!((nTightMuons + nTightElectrons) == 0)", "no tight lepton")
-                 .Filter("!((nVetoMuons + nVetoElectrons) > 2)", "more than two veto lepton")
-                 .Filter("!(nTightMuons > 0 && nVetoElectrons > 0)", "mix flavor leptons 1")
-                 .Filter("!(nTightElectrons > 0 && nVetoMuons > 0)", "mix flavor leptons 2")
-                 .Filter("!(nTightMuons == 1 && nVetoMuons > 1)", "more than ??")
-                 .Filter("!(nTightElectrons == 1 && nVetoElectrons > 1)", "more than ??");
+  chainedDf = chainedDf.Filter("!((nTightMuons + nTightElectrons) == 0)", "no tight lepton")
+                  .Filter("!((nVetoMuons + nVetoElectrons) > 2)", "more than two veto lepton")
+                  .Filter("!(nTightMuons > 0 && nVetoElectrons > 0)", "mix flavor leptons 1")
+                  .Filter("!(nTightElectrons > 0 && nVetoMuons > 0)", "mix flavor leptons 2")
+                  .Filter("!(nTightMuons == 1 && nVetoMuons > 1)", "more than ??")
+                  .Filter("!(nTightElectrons == 1 && nVetoElectrons > 1)", "more than ??");
 
   auto lepton_idx = [](RVec<int>& tightLeptons, RVec<float>& pt) {
     auto pt_sorted_indices = Reverse(Argsort(pt));
@@ -164,7 +166,7 @@ void vbs_flat_ntupler(std::string sample, int year) {
     return idx;
   };
 
-  auto df6 = df5.Define("mu_idx", lepton_idx, {"tightMuons", "Muon_pt"}).Define("ele_idx", lepton_idx, {"tightElectrons", "Electron_pt"});
+  chainedDf = chainedDf.Define("mu_idx", lepton_idx, {"tightMuons", "Muon_pt"}).Define("ele_idx", lepton_idx, {"tightElectrons", "Electron_pt"});
 
   auto cleanedFatJets = [](RVec<int>& fj_id,
                            RVec<float>& fj_eta,
@@ -198,9 +200,10 @@ void vbs_flat_ntupler(std::string sample, int year) {
     return cleanedFatJets_;
   };
 
-  auto df7 =
-      df6.Define("goodFatJets",
-                 "(FatJet_pt > AK8_MIN_PT || FatJet_pt_jesTotalUp > AK8_MIN_PT ||\
+  chainedDf =
+      chainedDf
+          .Define("goodFatJets",
+                  "(FatJet_pt > AK8_MIN_PT || FatJet_pt_jesTotalUp > AK8_MIN_PT ||\
                            FatJet_pt_jesTotalDown > AK8_MIN_PT) &&\
                            (abs(FatJet_eta) < AK8_MAX_ETA) &&\
                            (FatJet_msoftdrop > AK8_MIN_SDM || FatJet_msoftdrop_jesTotalUp > AK8_MIN_SDM ||\
@@ -221,7 +224,7 @@ void vbs_flat_ntupler(std::string sample, int year) {
     return idx;
   };
 
-  auto df8 = df7.Define("selectedFatJet_idx", selectedFatJet_idx, {"goodCleanedFatJets", "FatJet_msoftdrop"});
+  chainedDf = chainedDf.Define("selectedFatJet_idx", selectedFatJet_idx, {"goodCleanedFatJets", "FatJet_msoftdrop"});
 
   auto cleanedJets = [](RVec<int>& jt_id,
                         RVec<float>& jt_eta,
@@ -274,34 +277,35 @@ void vbs_flat_ntupler(std::string sample, int year) {
     return cleanedJets_;
   };
 
-  auto df9 = df8.Define("goodJets",
-                        "Jet_pt > AK4_PT_CUT ||\
+  chainedDf = chainedDf
+                  .Define("goodJets",
+                          "Jet_pt > AK4_PT_CUT ||\
                                        Jet_pt_jesTotalUp > AK4_PT_CUT ||\
                                        Jet_pt_jesTotalDown > AK4_PT_CUT")
-                 .Define("nBtag_loose",
-                         "Sum(abs(Jet_eta[goodJets]) < 2.4 && Jet_pt[goodJets] > 30 &&\
+                  .Define("nBtag_loose",
+                          "Sum(abs(Jet_eta[goodJets]) < 2.4 && Jet_pt[goodJets] > 30 &&\
                                           Jet_btagDeepB[goodJets] > 0.1241)")
-                 .Define("nBtag_medium",
-                         "Sum(nBtag_loose &&\
+                  .Define("nBtag_medium",
+                          "Sum(nBtag_loose &&\
                                            Jet_btagDeepB[goodJets] > 0.4184)")
-                 .Define("nBtag_tight",
-                         "Sum(nBtag_loose &&\
+                  .Define("nBtag_tight",
+                          "Sum(nBtag_loose &&\
                                           Jet_btagDeepB[goodJets] > 0.7527)")
-                 .Define("goodCleanedJets",
-                         cleanedJets,
-                         {"goodJets",
-                          "Jet_eta",
-                          "Jet_phi",
-                          "goodCleanedFatJets",
-                          "FatJet_eta",
-                          "FatJet_phi",
-                          "tightMuons",
-                          "Muon_eta",
-                          "Muon_phi",
-                          "tightElectrons",
-                          "Electron_eta",
-                          "Electron_phi"})
-                 .Filter("Sum(goodCleanedJets) > 2", "at least 2 AK4 cleaned jets");
+                  .Define("goodCleanedJets",
+                          cleanedJets,
+                          {"goodJets",
+                           "Jet_eta",
+                           "Jet_phi",
+                           "goodCleanedFatJets",
+                           "FatJet_eta",
+                           "FatJet_phi",
+                           "tightMuons",
+                           "Muon_eta",
+                           "Muon_phi",
+                           "tightElectrons",
+                           "Electron_eta",
+                           "Electron_phi"})
+                  .Filter("Sum(goodCleanedJets) > 2", "at least 2 AK4 cleaned jets");
 
   auto selectedJets_idx = [](int selected_fj, RVec<int> jt_id, RVec<float> jt_pt, RVec<float> jt_eta, RVec<float> jt_phi, RVec<float> jt_m) {
     auto idx = Combinations(jt_id, 2);
@@ -358,17 +362,18 @@ void vbs_flat_ntupler(std::string sample, int year) {
     return RVec<int>{selected_bos_j1, selected_bos_j2, selected_vbf_j1, selected_vbf_j2};
   };
 
-  auto df10 = df9.Define("selectedJets_idx", selectedJets_idx, {"selectedFatJet_idx", "goodCleanedJets", "Jet_pt", "Jet_eta", "Jet_phi", "Jet_mass"})
-                  .Define("bos_j1", "selectedJets_idx[0]")
-                  .Define("bos_j2", "selectedJets_idx[1]")
-                  .Define("vbf_j1", "selectedJets_idx[2]")
-                  .Define("vbf_j2", "selectedJets_idx[3]")
-                  .Filter(
-                      "selectedFatJet_idx != -1 ||\
+  chainedDf =
+      chainedDf.Define("selectedJets_idx", selectedJets_idx, {"selectedFatJet_idx", "goodCleanedJets", "Jet_pt", "Jet_eta", "Jet_phi", "Jet_mass"})
+          .Define("bos_j1", "selectedJets_idx[0]")
+          .Define("bos_j2", "selectedJets_idx[1]")
+          .Define("vbf_j1", "selectedJets_idx[2]")
+          .Define("vbf_j2", "selectedJets_idx[3]")
+          .Filter(
+              "selectedFatJet_idx != -1 ||\
                             (bos_j1 != -1 && bos_j2 != -1)",
-                      "Boosted or Resolved")
-                  .Filter("vbf_j1 != -1", "has selected AK4 vbf 1")
-                  .Filter("vbf_j2 != -1", "has selected AK4 vbf 2");
+              "Boosted or Resolved")
+          .Filter("vbf_j1 != -1", "has selected AK4 vbf 1")
+          .Filter("vbf_j2 != -1", "has selected AK4 vbf 2");
 
   int metz_type = 0;
   auto METzCalculator = [&metz_type](float l_pt, float l_eta, float l_phi, float l_m, float met_pt, float met_phi) {
@@ -476,8 +481,8 @@ void vbs_flat_ntupler(std::string sample, int year) {
   TString select_lepton1 = "mu_idx[0] != -1? %s[mu_idx[0]]: ele_idx[0] != -1? %s[ele_idx[0]]: -999.f";
   TString select_lepton2 = "mu_idx[1] != -1? %s[mu_idx[1]]: ele_idx[1] != -1? %s[ele_idx[1]]: -999.f";
 
-  auto df11 =
-      df10.Define("evt", "event")
+  chainedDf =
+      chainedDf.Define("evt", "event")
           .Define("lep1_m", "mu_idx[0] != -1? MUON_MASS: ele_idx[0] != -1? ELE_MASS: -999.f")
           .Define("lep2_m", "mu_idx[1] != -1? MUON_MASS: ele_idx[1] != -1? ELE_MASS: -999.f")
           .Define("lep1_pt", Form(select_lepton1, "Muon_pt", "Electron_pt"))
@@ -540,7 +545,7 @@ void vbs_flat_ntupler(std::string sample, int year) {
   auto outputFileName = sample_basename + ".root";
   std::cout << ">>> Output Filename: " << outputFileName << std::endl;
 
-  auto dfFinal = df11;
+  auto dfFinal = chainedDf;
   auto report = dfFinal.Report();
 
   dfFinal.Snapshot("Events", outputFileName, finalVariables);
