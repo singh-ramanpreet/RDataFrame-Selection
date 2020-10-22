@@ -1,27 +1,28 @@
-# ======================================
-# Set Parameters
-# make sure the log_dir actually exists 
-# otherwise jobs will be held
-year = 2018
-sample_list_dir = 2018
-log_dir = $(sample_list_dir)_jobs
-eos_output_path = /eos/uscms/store/user/singhr/test/
-
 #request_cpus   = 8
-#request_memory = 5 GB
-# ======================================
+#request_memory = 4 GB
+
+if !defined year
+  year = 2018
+endif
+
+if !defined sample_list_dir
+  sample_list_dir = 2018
+endif
+
+if !defined eos_output_path
+  eos_output_path = /eos/uscms/store/user/singhr/test/
+endif
 
 universe      = vanilla
-#+DesiredOS   = "SL7"
 x509userproxy = $ENV(X509_USER_PROXY)
 executable    = run.sh
 
 transfer_input  = True
 transfer_output = True
-transfer_input_files = run.sh, vbs_flat_ntupler.cc, $(sample_list_dir)
+transfer_input_files = run.sh, vbs_flat_ntupler.cc, data, $(sample_list_dir)
 
 
-log_filename  = $(log_dir)/$Fn(sample_list_file)_$(Cluster)_$(Process)
+log_filename  = logs/$(year)_$Fn(sample_list_file)_$(Cluster)_$(Process)
 log           = $(log_filename).log
 output        = $(log_filename).out
 error         = $(log_filename).err

@@ -41,12 +41,8 @@ EOS_DIR (Optional) -> copies .root file to the eos directory, if given.
 
 1. Make the files list as decribed before.
 
-2. Change the parameters in `condor_submit.jdl` (mainly in starting)
-
-3. Make the `log_dir` as set in `.jdl` file.
-
-4. Submit
+2. Give keyword arguments with `condor_submit`
 
 ```bash
-condor_submit condor_submit.jdl
+condor_submit sample_list_dir=2018 year=2018 eos_output_path=/eos/uscms/store/user/singhr/test/ condor_submit.jdl
 ```

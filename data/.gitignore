@@ -1,0 +1,5 @@
+# Everythin in this dir
+*
+
+# Except root files in this dir
+!*.root
