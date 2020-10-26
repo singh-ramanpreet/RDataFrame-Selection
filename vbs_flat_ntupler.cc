@@ -53,8 +53,9 @@ void vbs_flat_ntupler(std::string sample, int year) {
   gErrorIgnoreLevel = kError;
 
   ROOT::EnableImplicitMT();
-  const auto poolSize = ROOT::GetImplicitMTPoolSize();
+  const auto poolSize = ROOT::GetThreadPoolSize();
   std::cout << "Pool size: " << poolSize << std::endl;
+  ROOT::EnableImplicitMT(poolSize >= 8 ? 8 : poolSize);
 
   const std::string samplesBasePath = "root://cmseos.fnal.gov/";
 
@@ -232,7 +233,7 @@ void vbs_flat_ntupler(std::string sample, int year) {
   chainedDf =
       chainedDf
           .Define("goodFatJets",
-                  "(FatJet_pt > AK8_MIN_PT || FatJet_pt_jesTotalUp > AK8_MIN_PT ||\
+                  "(FatJet_pt_nom > AK8_MIN_PT || FatJet_pt_jesTotalUp > AK8_MIN_PT ||\
                            FatJet_pt_jesTotalDown > AK8_MIN_PT) &&\
                            (abs(FatJet_eta) < AK8_MAX_ETA) &&\
                            (FatJet_msoftdrop > AK8_MIN_SDM || FatJet_msoftdrop_jesTotalUp > AK8_MIN_SDM ||\
@@ -250,8 +251,11 @@ void vbs_flat_ntupler(std::string sample, int year) {
   auto selectedFatJet_idx = [](RVec<int>& fj_id, RVec<float>& fj_m) {
     int idx = -1;
     if (Sum(fj_id) > 0) {
-      auto sorted_dM_idx = Argsort(abs(fj_m[fj_id] - W_MASS));
-      idx = sorted_dM_idx[0];
+      auto sorted_dM_idx = Argsort(abs(fj_m - W_MASS));
+      auto sorted_fj_id = Take(fj_id, sorted_dM_idx);
+      if (sorted_dM_idx[sorted_fj_id].size() > 0) {
+        idx = int(sorted_dM_idx[sorted_fj_id][0]);
+      }
     }
     return idx;
   };
@@ -598,9 +602,9 @@ void vbs_flat_ntupler(std::string sample, int year) {
   chainedDf = chainedDf.Define("dilep_m", "dilep_p4[3]");
   finalVariables.push_back("dilep_m");
 
-  chainedDf = chainedDf.Define("bos_PuppiAK8_m_sd0_corr", "selectedFatJet_idx > -1? FatJet_msoftdrop[selectedFatJet_idx]: -999.f");
+  chainedDf = chainedDf.Define("bos_PuppiAK8_m_sd0_corr", "selectedFatJet_idx != -1? FatJet_msoftdrop[selectedFatJet_idx]: -999.f");
   finalVariables.push_back("bos_PuppiAK8_m_sd0_corr");
-  chainedDf = chainedDf.Define("bos_PuppiAK8_pt", "selectedFatJet_idx > -1? FatJet_pt[selectedFatJet_idx]: -999.f");
+  chainedDf = chainedDf.Define("bos_PuppiAK8_pt", "selectedFatJet_idx != -1? FatJet_pt[selectedFatJet_idx]: -999.f");
   finalVariables.push_back("bos_PuppiAK8_pt");
 
   finalVariables.push_back("nBtag_loose");
